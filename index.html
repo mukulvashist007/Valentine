@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine?</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      overflow: hidden;
+    }
+
+    h1 {
+      color: white;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    #subtitle {
+      color: #fff;
+      margin-bottom: 30px;
+      font-size: 20px;
+    }
+
+    .buttons {
+      position: relative;
+      width: 320px;
+      height: 160px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    #yes {
+      background-color: #4CAF50;
+      color: white;
+      left: 20px;
+      top: 60px;
+    }
+
+    #no {
+      background-color: #f44336;
+      color: white;
+      left: 180px;
+      top: 60px;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 24px;
+      animation: floatUp 6s linear forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      animation: fall 2s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Shravani, will you be my Valentine? 💖</h1>
+  <div id="subtitle">Please say yes 🥺</div>
+
+  <div class="buttons">
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const subtitle = document.getElementById("subtitle");
+
+    const dramaTexts = [
+      "Are you sure? 😢",
+      "Think again 🥺",
+      "My heart is breaking 💔",
+      "Last chance 😭",
+      "Ok but… really? 👉👈"
+    ];
+
+    let dramaIndex = 0;
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 260;
+      const y = Math.random() * 120;
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      subtitle.textContent = dramaTexts[dramaIndex % dramaTexts.length];
+      dramaIndex++;
+    });
+
+    yesBtn.addEventListener("click", () => {
+      launchConfetti();
+      setTimeout(() => {
+        window.location.href = "yes.html";
+      }, 1800);
+    });
+
+    function launchConfetti() {
+      for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.backgroundColor =
+          ["#ff0", "#f0f", "#0ff", "#0f0", "#f00"][Math.floor(Math.random() * 5)];
+        confetti.style.animationDuration = (Math.random() + 1.5) + "s";
+
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 2000);
+      }
+    }
+
+    /* Floating hearts generator */
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 500);
+  </script>
+
+</body>
+</html>
