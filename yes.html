@@ -2,43 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>YAYYY 💕</title>
+  <title>YAYYYY 💕</title>
+
   <style>
     body {
-      height: 100vh;
       margin: 0;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       font-family: 'Comic Sans MS', cursive;
-      background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
       text-align: center;
+      overflow: hidden;
     }
 
     h1 {
+      font-size: 50px;
       color: white;
-      font-size: 48px;
-      margin-bottom: 20px;
-      animation: pop 1s ease infinite alternate;
+      margin-bottom: 10px;
+      animation: bounce 1s infinite alternate;
     }
 
-    @keyframes pop {
-      from { transform: scale(1); }
-      to { transform: scale(1.1); }
+    p {
+      color: white;
+      font-size: 22px;
+      margin-bottom: 25px;
     }
 
     img {
       width: 280px;
       border-radius: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+
+    /* Floating mini hearts */
+    .mini-heart {
+      position: fixed;
+      bottom: -10px;
+      font-size: 18px;
+      animation: floatUp 5s linear forwards;
+      opacity: 0.7;
+    }
+
+    @keyframes bounce {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>YAYYYY!! 💕🥰</h1>
-  <img src="https://media.giphy.com/media/l4FGpPki5v2Bcd6Ss/giphy.gif" alt="Cute love gif">
+  <h1>YAYYYY!! 😻💖</h1>
+  <p>You just made my day (and my heart) very happy 🥰</p>
+
+  <img 
+    src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" 
+    alt="Cute happy cat gif"
+  >
+
+  <script>
+    // floating hearts forever because love
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("mini-heart");
+      heart.textContent = "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 10 + 16 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 5000);
+    }, 500);
+  </script>
 
 </body>
 </html>
